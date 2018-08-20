@@ -1,9 +1,13 @@
 <?php namespace Acelle\Extra\LogViewer\Http\Controllers;
 
-class LogViewerController
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+
+class LogViewerController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        echo "Hello wordl";
+        echo "Hello world";
     }
+
 }

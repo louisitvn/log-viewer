@@ -1,0 +1,20 @@
+<?php namespace Acelle\Extra\LogViewer\Providers;
+
+use Illuminate\Routing\Router;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+
+class RouteServiceProvider extends ServiceProvider
+{
+    /**
+    * Define the routes for the application.
+    *
+    * @param \Illuminate\Routing\Router $router
+    * @return void
+    */
+    public function map(Router $router)
+    {
+        $router->group(['prefix' => 'log-viewer', 'namespace' => 'Acelle\\Extra\\LogViewer\\Http\\Controllers'], function($router) {
+            $router->get('/', 'LogViewerController@index');
+        });
+    }
+}
