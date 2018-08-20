@@ -9,6 +9,9 @@ Add the following to the main composer.json
         "version": "dev-master",
         "url": "/home/nghi/log-viewer"
     }
+],
+"require": [
+    "louisitvn/log-viewer": "dev-master",
 ]
 
 ```
