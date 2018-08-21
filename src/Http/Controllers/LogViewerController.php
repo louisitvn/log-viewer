@@ -34,4 +34,9 @@ class LogViewerController extends Controller
             fclose($f);
         }
     }
+
+    public function filemanager(Request $request)
+    {
+        return view('log-viewer::filemanager.index', ['current_url' => route('log-viewer.filemanager')]);
+    }
 }
