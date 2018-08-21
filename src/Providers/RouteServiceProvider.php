@@ -18,7 +18,8 @@ class RouteServiceProvider extends ServiceProvider
             'prefix' => 'log-viewer',
             'namespace' => 'Acelle\\Extra\\LogViewer\\Http\\Controllers',
             'middleware' => ['web', 'auth', 'not_installed', 'backend'], ], function ($router) {
-                $router->get('/', 'LogViewerController@index');
+                $router->get('/', 'LogViewerController@index')->name('log-viewer');
+                $router->post('{file}/empty', 'LogViewerController@empty');
             }
         );
     }

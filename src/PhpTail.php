@@ -120,6 +120,7 @@ class PhpTail
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<input type="hidden" name="_token" id="csrf-token" value="<?php echo csrf_token() ?>" />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -223,8 +224,11 @@ class PhpTail
         $(".file").click(function(e) {
             $("#results").text("");
             lastSize = 0;
-console.log(e);
             lastFile = $(e.target).text();
+        });
+        
+        $(".empty-file").click(function(e) {
+            emptyFile(e.target.name);
         });
 
         //Set up an interval for updating the log. Change updateTime in the PHPTail contstructor to change this
@@ -279,6 +283,25 @@ console.log(e);
             }
         });
     }
+    
+    function emptyFile(file) {
+        var ask = confirm('Are you sure you want to empty "' + file + '"?');
+        if (!ask) {
+            return false;
+        }
+        $.ajax({type: 'POST', url: "<?php echo route('log-viewer'); ?>/" + file + "/empty", data: {_token: $('#csrf-token').val() }}, function() {
+            // alert( "success" );
+        })
+        .done(function() {
+            window.location = "<?php echo route('log-viewer'); ?>/";
+        })
+        .fail(function() {
+            alert( "error" );
+        })
+        .always(function() {
+            //alert( "finished" );
+        });
+    }
     /* ]]> */
 </script>
 </head>
@@ -295,6 +318,14 @@ console.log(e);
                         <ul class="dropdown-menu" role="menu">
                             <?php foreach ($this->log as $title => $f): ?>
                             <li><a class="file" href="#<?php echo $title; ?>"><?php echo $title; ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Empty<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <?php foreach ($this->log as $title => $f): ?>
+                            <li><a class="empty-file" name="<?php echo $title; ?>" href="#<?php echo $title; ?>"><?php echo $title; ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     </li>

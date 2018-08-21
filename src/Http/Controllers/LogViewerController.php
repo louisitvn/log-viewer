@@ -25,4 +25,13 @@ class LogViewerController extends Controller
          */
         $tail->generateGUI();
     }
+
+    public function empty(Request $request, $file)
+    {
+        $f = @fopen(storage_path("logs/{$file}"), 'r+');
+        if ($f !== false) {
+            ftruncate($f, 0);
+            fclose($f);
+        }
+    }
 }
