@@ -14,8 +14,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group(['prefix' => 'log-viewer', 'namespace' => 'Acelle\\Extra\\LogViewer\\Http\\Controllers'], function ($router) {
-            $router->get('/', 'LogViewerController@index');
-        });
+        $router->group([
+            'prefix' => 'log-viewer',
+            'namespace' => 'Acelle\\Extra\\LogViewer\\Http\\Controllers',
+            'middleware' => ['web', 'auth', 'not_installed', 'backend'], ], function ($router) {
+                $router->get('/', 'LogViewerController@index');
+            }
+        );
     }
 }
