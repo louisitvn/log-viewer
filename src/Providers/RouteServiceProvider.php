@@ -2,7 +2,7 @@
 
 namespace Acelle\Extra\LogViewer\Providers;
 
-use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -12,9 +12,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @param \Illuminate\Routing\Router $router
      */
-    public function boot(Router $router)
+    public function boot()
     {
-        parent::boot($router);
+        parent::boot();
         $this->loadViewsFrom(realpath(__DIR__.'/../../resources/views'), 'log-viewer');
     }
     
@@ -23,16 +23,16 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @param \Illuminate\Routing\Router $router
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group([
+        Route::group([
             'prefix' => 'log-viewer',
             'namespace' => 'Acelle\\Extra\\LogViewer\\Http\\Controllers',
             'middleware' => ['web_nocsrf', 'auth', 'not_installed', 'backend'], ], function ($router) {
-                $router->get('/', 'LogViewerController@index')->name('log-viewer');
-                $router->post('{file}/empty', 'LogViewerController@empty');
-                $router->get('filemanager', 'LogViewerController@filemanager');
-                $router->post('filemanager', 'LogViewerController@filemanager')->name('log-viewer.filemanager');
+                Route::get('/', 'LogViewerController@index')->name('log-viewer');
+                Route::post('{file}/empty', 'LogViewerController@empty');
+                Route::get('filemanager', 'LogViewerController@filemanager');
+                Route::post('filemanager', 'LogViewerController@filemanager')->name('log-viewer.filemanager');
             }
         );
     }
