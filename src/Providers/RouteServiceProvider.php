@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => 'Acelle\\Extra\\LogViewer\\Http\\Controllers',
             'middleware' => ['web_nocsrf', 'auth', 'not_installed', 'backend'], ], function ($router) {
                 Route::get('/', 'LogViewerController@index')->name('log-viewer');
-                Route::post('{file}/empty', 'LogViewerController@empty');
+                Route::post('{file}/empty', 'LogViewerController@emptyFile');
                 Route::get('filemanager', 'LogViewerController@filemanager');
                 Route::post('filemanager', 'LogViewerController@filemanager')->name('log-viewer.filemanager');
             }
