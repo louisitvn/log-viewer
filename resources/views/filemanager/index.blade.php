@@ -455,7 +455,8 @@ if (!empty($_FILES) && !FM_READONLY) {
 
     $errors = 0;
     $uploads = 0;
-    $total = count($f['file']['name']);
+    // $total = count($f['file']['name']);
+    $total = 1;
     $allowed = (FM_EXTENSION) ? explode(',', FM_EXTENSION) : false;
 
     $filename = $f['file']['name'];
@@ -693,7 +694,7 @@ if (isset($_GET['upload']) && !FM_READONLY) {
     <div class="path">
         <p><b>Uploading files</b></p>
         <p class="break-word">Destination folder: <?php echo fm_enc(fm_convert_win(FM_ROOT_PATH . '/' . FM_PATH)) ?></p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?p='.fm_enc(FM_PATH) ?>" class="dropzone" id="fileuploader" enctype="multipart/form-data">
+        <form action="<?php echo FM_SELF_URL.'?p='.fm_enc(FM_PATH) ?>" class="dropzone" id="fileuploader" enctype="multipart/form-data">
             <input type="hidden" name="p" value="<?php echo fm_enc(FM_PATH) ?>">
             <div class="fallback">
                 <input name="file" type="file" multiple />
