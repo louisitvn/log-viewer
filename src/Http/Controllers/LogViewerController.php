@@ -37,6 +37,9 @@ class LogViewerController extends Controller
 
     public function filemanager(Request $request)
     {
-        return view('log-viewer::filemanager.index', ['current_url' => route('log-viewer.filemanager')]);
+        return view('log-viewer::filemanager.index', [
+            'current_url' => route('log-viewer.filemanager'),
+            'root' => base_path()
+        ]);
     }
 }
