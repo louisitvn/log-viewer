@@ -3,7 +3,7 @@
 global $CONFIG, $use_auth, $auth_users, $theme, $cfg, $lang, $report_errors, $show_hidden_files, $lang_list, $hide_Cols, $calc_folder, $exclude_items;
 
 //Default Configuration
-$CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":false,"calc_folder":false}';
+$CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":true,"hide_Cols":false,"calc_folder":false}';
 
 /**
  * H3K | Tiny File Manager V2.4.4
